@@ -1,18 +1,57 @@
+import authApi from '@/api/auth'
+import {
+	setItem
+} from '@/helpers/persistanceStorage'
+
 const state = {
-	isSubmitting: false
+	isSubmitting: false,
+	currentUser: null,
+	validationErrors: null,
+	isLoggedIn: null
+}
+
+export const mutationsTypes = {
+	registerStart: '[auth] registerStart',
+	registerSuccess: '[auth] registerSuccess',
+	registerFailure: '[auth] registerFailure'
+}
+
+export const actionsTypes = {
+	register: '[auth] register'
 }
 
 const mutations = {
-	registerStart(state) {
+	[mutationsTypes.registerStart](state) {
 		state.isSubmitting = true
+		state.validationErrors = null
+	},
+	[mutationsTypes.registerSuccess](state, payload) {
+		state.isSubmitting = false
+		state.currentUser = payload
+		state.isLoggedIn = true
+	},
+	[mutationsTypes.registerFailure](state, payload) {
+		state.isSubmitting = false
+		state.validationErrors = payload
+		state.isLoggedIn = false
 	}
 }
 
 const actions = {
-	register(context) {
-		setTimeout(() => {
-			context.commit('registerStart');
-		}, 1000)
+	[actionsTypes.register](context, credentials) {
+		return new Promise(resolve => {
+			context.commit(mutationsTypes.registerStart)
+			authApi
+				.register(credentials)
+				.then(response => {
+					context.commit(mutationsTypes.registerSuccess, response.data.user)
+					setItem('accessToken', response.data.user.token)
+					resolve(response.data.user)
+				})
+				.catch(result => {
+					context.commit(mutationsTypes.registerFailure, result.response.data.errors)
+				})
+		})
 	}
 }
 

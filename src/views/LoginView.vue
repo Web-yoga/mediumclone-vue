@@ -5,7 +5,9 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign up</h1>
           <p class="text-xs-center">
-            <router-link :to="{name: 'login'}"> Have an account? </router-link>
+            <router-link :to="{name: 'register'}">
+              Need an account?
+            </router-link>
           </p>
           <app-validation-errors
             v-if="validationErrors"
@@ -28,19 +30,11 @@
                 v-model="email"
               />
             </fieldset>
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="password"
-                placeholder="Password"
-                v-model="password"
-              />
-            </fieldset>
             <button
               class="btn btn-lg btn-primary pull-xs-right"
               :disabled="isSubmitting"
             >
-              Sign Up
+              Sign In
             </button>
           </form>
         </div>
