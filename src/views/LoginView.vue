@@ -18,16 +18,16 @@
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Username"
-                v-model="username"
+                placeholder="Email"
+                v-model="email"
               />
             </fieldset>
             <fieldset class="form-group">
               <input
                 class="form-control form-control-lg"
-                type="text"
-                placeholder="Email"
-                v-model="email"
+                type="password"
+                placeholder="Password"
+                v-model="password"
               />
             </fieldset>
             <button
@@ -44,41 +44,39 @@
 </template>
 
 <script>
-import AppValidationErrors from '@/components/ValidationErrors';
-import {actionsTypes} from '@/store/modules/auth';
+import {mapState} from 'vuex'
+
+import AppValidationErrors from '@/components/ValidationErrors'
+import {actionsTypes} from '@/store/modules/auth'
 
 export default {
-  name: 'AppRegister',
+  name: 'AppLogin',
   components: {
     AppValidationErrors,
   },
   data() {
     return {
-      username: '',
       email: '',
       password: '',
-    };
+    }
   },
   computed: {
-    isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
-    },
-    validationErrors() {
-      return this.$store.state.auth.validationErrors;
-    },
+    ...mapState({
+      isSubmitting: (state) => state.auth.isSubmitting,
+      validationErrors: (state) => state.auth.validationErrors,
+    }),
   },
   methods: {
     onSubmit() {
       this.$store
-        .dispatch(actionsTypes.register, {
-          username: this.username,
+        .dispatch(actionsTypes.login, {
           email: this.email,
           password: this.password,
         })
         .then(() => {
-          this.$router.push({name: 'home'});
-        });
+          this.$router.push({name: 'home'})
+        })
     },
   },
-};
+}
 </script>

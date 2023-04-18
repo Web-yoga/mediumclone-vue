@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import HomeView from '@/views/HomeView'
 import RegisterView from '@/views/RegisterView'
+import LoginView from '@/views/LoginView'
 
 const routes = [{
 		path: '/',
@@ -18,7 +19,7 @@ const routes = [{
 	{
 		path: '/login',
 		name: 'login',
-		component: RegisterView
+		component: LoginView
 	}
 ]
 
