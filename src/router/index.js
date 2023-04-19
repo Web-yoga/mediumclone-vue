@@ -20,6 +20,21 @@ const routes = [{
 		path: '/login',
 		name: 'login',
 		component: LoginView
+	},
+	{
+		path: '/createArticle',
+		name: 'createArticle',
+		component: LoginView
+	},
+	{
+		path: '/settings',
+		name: 'settings',
+		component: LoginView
+	},
+	{
+		path: '/userProfile',
+		name: 'userProfile',
+		component: LoginView
 	}
 ]
 
