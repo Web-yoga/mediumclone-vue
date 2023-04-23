@@ -13,7 +13,7 @@
             >Home</router-link
           >
         </li>
-        <template v-if="isAnonymous">
+        <template v-if="isLoggedIn">
           <li class="nav-item">
             <router-link
               class="nav-link"
@@ -49,7 +49,7 @@
             </router-link>
           </li>
         </template>
-        <template v-if="!isLoggedIn">
+        <template v-if="isAnonymous">
           <li class="nav-item">
             <router-link
               class="nav-link"
@@ -75,15 +75,21 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import {getterTypes} from '@/store/modules/auth'
 
 export default {
   name: 'AppTopbar',
   computed: {
+    ...mapGetters({
+      currentUser: getterTypes.currentUser,
+      isLoggedIn: getterTypes.isLoggedIn,
+      isAnonymous: getterTypes.isAnonymous,
+    }),
+    /*
     ...mapState({
-      /*  currentUser: (state) => state.auth.currentUser, */
-      /* isLoggedIn: (state) => state.auth.isLoggedIn, */
+    //  currentUser: (state) => state.auth.currentUser, 
+    //  isLoggedIn: (state) => state.auth.isLoggedIn, 
     }),
     currentUser() {
       return this.$store.getters[getterTypes.currentUser]
@@ -94,6 +100,7 @@ export default {
     isAnonymous() {
       return this.$store.getters[getterTypes.isAnonymous]
     },
+	*/
   },
 }
 </script>
