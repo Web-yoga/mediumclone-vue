@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import AppValidationErrors from '@/components/ValidationErrors';
-import {actionsTypes} from '@/store/modules/auth';
+import AppValidationErrors from '@/components/ValidationErrors'
+import {actionsTypes} from '@/store/modules/auth'
 
 export default {
   name: 'AppRegister',
@@ -63,14 +63,14 @@ export default {
       username: '',
       email: '',
       password: '',
-    };
+    }
   },
   computed: {
     isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
+      return this.$store.state.auth.isSubmitting
     },
     validationErrors() {
-      return this.$store.state.auth.validationErrors;
+      return this.$store.state.auth.validationErrors
     },
   },
   methods: {
@@ -82,9 +82,9 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push({name: 'home'});
-        });
+          this.$router.push({name: 'globalFeed'})
+        })
     },
   },
-};
+}
 </script>
