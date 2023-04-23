@@ -22,19 +22,44 @@ const routes = [{
 		component: LoginView
 	},
 	{
-		path: '/createArticle',
+		path: '/feed',
+		name: 'yourFeed',
+		component: GlobalFeedView
+	},
+	{
+		path: '/tags/:slug',
+		name: 'tag',
+		component: GlobalFeedView
+	},
+	{
+		path: '/articles/new',
 		name: 'createArticle',
-		component: LoginView
+		component: GlobalFeedView
+	},
+	{
+		path: '/articles/:slug',
+		name: 'article',
+		component: GlobalFeedView
+	},
+	{
+		path: '/articles/:slug/edit',
+		name: 'editArticle',
+		component: GlobalFeedView
 	},
 	{
 		path: '/settings',
 		name: 'settings',
-		component: LoginView
+		component: GlobalFeedView
 	},
 	{
-		path: '/userProfile',
+		path: '/profiles/:slug',
 		name: 'userProfile',
-		component: LoginView
+		component: GlobalFeedView
+	},
+	{
+		path: '/profiles/:slug/favorites',
+		name: 'userProfileFavorites',
+		component: GlobalFeedView
 	}
 ]
 
